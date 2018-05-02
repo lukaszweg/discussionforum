@@ -34,6 +34,12 @@ public class Thread {
         this.post = post;
     }
 
+    public Thread(@NotNull String threadName, @NotNull String description, User userThread) {
+        this.threadName = threadName;
+        this.description = description;
+        this.userThread = userThread;
+    }
+
     public Long getId() {
         return id;
     }

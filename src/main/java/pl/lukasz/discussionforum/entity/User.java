@@ -31,6 +31,11 @@ public class User {
         this.thread = thread;
     }
 
+    public User(@NotNull String userName, @NotNull String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }
