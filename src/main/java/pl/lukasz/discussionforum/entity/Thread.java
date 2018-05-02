@@ -22,7 +22,7 @@ public class Thread {
     @JoinColumn(name = "user_id")
     private User userThread;
 
-    @OneToMany(mappedBy = "threadPost")
+    @OneToMany(mappedBy = "threadPost", cascade = CascadeType.ALL)
     private List<Post> post;
 
     public Thread() {}

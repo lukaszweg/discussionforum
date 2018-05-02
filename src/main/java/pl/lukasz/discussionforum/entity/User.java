@@ -3,6 +3,7 @@ package pl.lukasz.discussionforum.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -10,10 +11,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String userName;
+    @Column(unique = true, nullable = false)
+    private String username;
 
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "userPost")
@@ -22,17 +23,29 @@ public class User {
     @OneToMany(mappedBy = "userThread")
     private List<Thread> thread;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "usersRoles",
+            joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id"))
+    private Set<Role> roles;
+
     public User() {}
 
-    public User(@NotNull String userName, @NotNull String password, List<Post> post, List<Thread> thread) {
-        this.userName = userName;
+    public User(@NotNull String username, @NotNull String password, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(@NotNull String username, @NotNull String password, List<Post> post, List<Thread> thread) {
+        this.username = username;
         this.password = password;
         this.post = post;
         this.thread = thread;
     }
 
-    public User(@NotNull String userName, @NotNull String password) {
-        this.userName = userName;
+    public User(@NotNull String username, @NotNull String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -44,12 +57,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -76,11 +89,19 @@ public class User {
         this.thread = thread;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", post=" + post +
                 ", thread=" + thread +
