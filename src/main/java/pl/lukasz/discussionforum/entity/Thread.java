@@ -1,7 +1,11 @@
 package pl.lukasz.discussionforum.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import sun.util.calendar.LocalGregorianCalendar;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,6 +21,9 @@ public class Thread {
     @Lob
     @NotNull
     private String description;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate createDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -37,6 +44,13 @@ public class Thread {
     public Thread(@NotNull String threadName, @NotNull String description, User userThread) {
         this.threadName = threadName;
         this.description = description;
+        this.userThread = userThread;
+    }
+
+    public Thread(@NotNull String threadName, @NotNull String description, LocalDate createDate, User userThread) {
+        this.threadName = threadName;
+        this.description = description;
+        this.createDate = createDate;
         this.userThread = userThread;
     }
 
@@ -89,5 +103,13 @@ public class Thread {
                 ", userThread=" + userThread +
                 ", post=" + post +
                 '}';
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 }

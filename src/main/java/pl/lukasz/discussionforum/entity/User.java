@@ -14,8 +14,11 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @OneToMany(mappedBy = "userPost")
     private List<Post> post;
@@ -47,6 +50,12 @@ public class User {
     public User(@NotNull String username, @NotNull String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -95,6 +104,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

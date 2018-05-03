@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(User user) {
+    public void presave(User user) {
         Set<Role> roles = new HashSet<>();
         Role role = roleService.findByName("USER");
         roles.add(role);

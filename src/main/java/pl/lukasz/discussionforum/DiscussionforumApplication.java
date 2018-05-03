@@ -41,18 +41,12 @@ public class DiscussionforumApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String password = "test";
+//		String password = "test";
+//		User user1 = new User("Name1", passwordEncoder.encode(password), "lukasz@test.pl");
+//		userRepository.save(user1);
+//		Thread thread1 = new Thread("name1", "zawartosc1", user1);
+//		threadRepository.save(thread1);
 
-
-
-		User user1 = new User("Name1", passwordEncoder.encode(password));
-		User user2 = new User("Name2", "Last2");
-		userRepository.save(user1);
-		userRepository.save(user2);
-		Thread thread1 = new Thread("name1", "zawartosc1", user1);
-		Thread thread2 = new Thread("name2", "zawartosc2", user2);
-		threadRepository.save(thread1);
-		threadRepository.save(thread2);
 
 	}
 }

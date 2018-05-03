@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html th:lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Forum</title>
+<head th:replace="site/head :: head">
 </head>
 <body>
-<a href="/login">login</a>
-<a href="/register">register</a>
-<p></p>
-<table th:each="thread : ${threads}">
-    <tr>
-        <td th:text="${thread.getThreadName()} + ' Author: ' + ${thread.getUserThread().getUsername()}"></td>
-
-    </tr>
-</table>
+    <nav th:replace="site/navbar :: navbar"></nav>
+    <p></p>
+    <table th:each="thread : ${threads}">
+        <tr>
+            <td th:text="${thread.getThreadName()} + ' Author: ' + ${thread.getUserThread().getUsername()}"></td>
+        </tr>
+    </table>
 </body>
 </html>

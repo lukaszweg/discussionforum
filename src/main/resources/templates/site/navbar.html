@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+</head>
+<body>
+<nav th:fragment="navbar"  class="topnav">
+    <a th:href="@{/}">Strona Główna</a>
+    <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="auth">Rejestracja</a>
+    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="auth">Logowanie</a>
+    <a sec:authorize="isAuthenticated()"  th:href="@{/logout}" class="auth">Wyloguj</a>
+</nav>
+</body>
+</html>

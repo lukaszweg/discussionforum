@@ -2,6 +2,7 @@ package pl.lukasz.discussionforum.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,35 +10,38 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAdapter {
+
+    private UserDetailsService userDetailsService;
+    private PasswordEncoder passwordEncoder;
+
 
     private static final String[] FOR_AUTHORIZED_USERS =
             {"/user/**", "/test", };
     private static final String[] FOR_ADMINS = {
-            "/testical", "testoo"
-    };
-
+            "/testical", "testoo"};
     private static final String[] AUTHORIZED_ROLES =
             {"USER", "ADMIN"};
-
     private static final String[] ADMINS_ROLES =
             {"ADMIN"};
 
 
-    @Autowired
-    @Qualifier("userDetailsServiceImple")
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
 
+
+    public WebSecurityConfigurerAdapterConfig
+            (@Qualifier("userDetailsServiceImple")UserDetailsService userDetailsService,
+             PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
 
 
@@ -65,10 +69,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(60)
                 .key("forum-key");
 
+        http.addFilterBefore(characterEncodingFilter(), CsrfFilter.class);
+
+    }
+
+    public CharacterEncodingFilter characterEncodingFilter() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
-        http.addFilterBefore(characterEncodingFilter, CsrfFilter.class);
-
+        return characterEncodingFilter;
     }
 }

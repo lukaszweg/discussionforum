@@ -5,7 +5,7 @@ import pl.lukasz.discussionforum.entity.User;
 public interface UserService {
     User findByUsername(String username);
 
-    void create(User user);
+    void presave(User user);
 
     User save(User user);
 }
