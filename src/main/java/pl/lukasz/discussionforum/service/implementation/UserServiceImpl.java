@@ -8,8 +8,8 @@ import pl.lukasz.discussionforum.repository.UserRepository;
 import pl.lukasz.discussionforum.service.RoleService;
 import pl.lukasz.discussionforum.service.UserService;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,4 +44,27 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public List<User> findAllUsers() {
+        List<User> userList = new ArrayList<>();
+        Role role = roleService.findByName("USER");
+        for(User user : userRepository.findAll()) {
+            if(user.getRoles().contains(role)) {
+                userList.add(user);
+            }
+        }
+        return userList;
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findOneUserById(Long id) {
+        return userRepository.findById(id);
+        }
+
 }

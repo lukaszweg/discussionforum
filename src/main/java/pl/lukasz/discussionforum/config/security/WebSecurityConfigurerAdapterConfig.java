@@ -24,11 +24,9 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
 
 
     private static final String[] FOR_AUTHORIZED_USERS =
-            {"/user/**", "/test", };
-    private static final String[] FOR_ADMINS = {
-            "/testical", "testoo"};
-    private static final String[] AUTHORIZED_ROLES =
-            {"USER", "ADMIN"};
+            {"/user/**", "/profile/**" };
+    private static final String[] FOR_ADMINS =
+            {"/users/**"};
     private static final String[] ADMINS_ROLES =
             {"ADMIN"};
 
@@ -56,7 +54,7 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
         http
                 .authorizeRequests()
                 .antMatchers(FOR_AUTHORIZED_USERS).authenticated()
-                .antMatchers(FOR_ADMINS).hasAnyRole(ADMINS_ROLES)
+                .antMatchers(FOR_ADMINS).hasAnyAuthority(ADMINS_ROLES)
                 .and()
                 .formLogin()
                 .loginPage("/login")

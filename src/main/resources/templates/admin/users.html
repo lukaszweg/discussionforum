@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="site/head :: head">
+</head>
+<body>
+    <nav th:replace="site/navbar :: navbar"></nav>
+<table th:each="user : ${users}">
+    <tr>
+        <td>
+            <a th:href="@{'user/' + ${user.getUsername()}}" th:text="${user.getUsername()}"></a>
+        </td>
+        <td>
+           <a th:href="@{'users/delete/' + ${user.getId()}}"> <button th:text="usuń"></button></a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

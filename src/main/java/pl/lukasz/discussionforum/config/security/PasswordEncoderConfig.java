@@ -4,10 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 @Configuration
-//Klasa odpowiedzialna za kodowanie hasła użytkownika
-public class PasswordEncoderConfig {
+public class passwordEncoderConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {

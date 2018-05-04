@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.lukasz.discussionforum.entity.User;
@@ -58,5 +59,34 @@ public class UserController {
         }
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String getAllUsers(Model model) {
+        model.addAttribute("users", userService.findAllUsers());
+        return "admin/users";
+    }
+
+    @RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.delete(id);
+        return "redirect:/users";
+    }
+
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
+    public String findOneUserById(@PathVariable("username") String username, Model model) {
+        model.addAttribute("user", userService.findByUsername(username));
+        return "user";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Authentication authentication, Model model) {
+        User user;
+        user = userService.findByUsername(authentication.getName());
+        model.addAttribute("user", user);
+        return "user";
+        /* todo
+        dodać nowe pojo w którym będą zawarte posty i tematy użytkownika i je wyświetla.
+         */
     }
 }

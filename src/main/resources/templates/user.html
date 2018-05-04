@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html th:lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="site/head :: head">
+</head>
+<body>
+<nav th:replace="site/navbar :: navbar"></nav>
+<h1 th:text="${user.getUsername()}"></h1>
+<a th:if="${#authentication.getName()} eq ${user.getUsername()}" th:href="@{#}">Test</a>
+</body>
+</html>
