@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="site/head :: head">
+</head>
+<body>
+<nav th:replace="site/navbar :: navbar"></nav>
+<form th:object="${newThread}" th:action='@{add}' method="post">
+    <label for="threadName">Nazwa tematu</label>
+    <input th:field="*{threadName}" id="threadName" name="threadName" type="text"/>
+    <label for="description">Opis</label>
+    <input th:field="*{description}" id="description" name="description" type="text"/>
+    <input class="btn waves-effect waves-light" type="submit" name="action" value="Register" />
+</form>
+
+</body>
+</html>

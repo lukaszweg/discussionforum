@@ -22,6 +22,7 @@ public class Thread {
     @NotNull
     private String description;
 
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate createDate;
 

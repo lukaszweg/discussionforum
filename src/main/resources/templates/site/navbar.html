@@ -5,12 +5,13 @@
 </head>
 <body>
 <nav th:fragment="navbar"  class="topnav">
-    <a th:href="@{/}">Strona Główna</a>
+    <a th:href="@{/}">Strona główna</a>
+    <a th:href="@{/threads}">Tematy</a>
     <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Użytkownicy</a>
     <a sec:authorize="!isAuthenticated()" th:href="@{/register}" class="auth">Rejestracja</a>
     <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="auth">Logowanie</a>
     <a sec:authorize="isAuthenticated()"  th:href="@{/logout}" class="auth">Wyloguj</a>
-    <a sec:authorize="isAuthenticated()" th:href="@{/profile}" class="auth">Mój Profil</a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/profile}" class="auth">Mój profil</a>
 </nav>
 </body>
 </html>
