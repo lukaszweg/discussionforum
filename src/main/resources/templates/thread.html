@@ -6,6 +6,8 @@
 <nav th:replace="site/navbar :: navbar"></nav>
 <h1 th:text="${findThread.get().getThreadName()}"></h1>
 <p th:text="${findThread.get().getDescription()}"></p>
+<a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete'}"  >USUN</a>
+<a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete'}" >USUN</a>
 
 </body>
 </html>

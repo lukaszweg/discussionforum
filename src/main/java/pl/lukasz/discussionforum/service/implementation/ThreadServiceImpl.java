@@ -57,5 +57,16 @@ public class ThreadServiceImpl implements ThreadService {
             threadRepository.deleteById(threadId);
         }
     }
+
+
+//    @Override
+//    public Optional<Thread> update(Long threadId, Authentication authentication) {
+//        String auth = authentication.getName();
+//        String user = threadRepository.findById(threadId).get().getUserThread().getUsername();
+//        if(auth.equals(user)) {
+//            return threadRepository.findById(threadId);
+//        }
+//        return null;
+//    }
 }
 

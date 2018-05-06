@@ -14,4 +14,7 @@ public interface ThreadService {
     Optional<Thread> findOne(Long threadId);
 
     void delete(Long threadId, Authentication authentication);
+
+
+//    Optional<Thread> update(Long threadId, Authentication authentication);
 }

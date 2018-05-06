@@ -53,10 +53,5 @@ public class ThreadController {
     }
 
 
+    }
 
-    /* todo
-    wczytywanie danego tematu
-    usuwanie tematu
-    edytowanie tematu
-     */
-}
