@@ -10,6 +10,7 @@ import pl.lukasz.discussionforum.service.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ThreadServiceImpl implements ThreadService {
@@ -33,6 +34,11 @@ public class ThreadServiceImpl implements ThreadService {
         thread.setCreateDate(getDate);
         thread.setUserThread(userService.findByUsername(authentication.getName()));
         return threadRepository.save(thread);
+    }
+
+    @Override
+    public Optional<Thread> findOne(Long threadId) {
+        return threadRepository.findById(threadId);
     }
 }
 

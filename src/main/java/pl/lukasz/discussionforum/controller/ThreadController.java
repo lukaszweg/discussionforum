@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.lukasz.discussionforum.entity.Thread;
@@ -37,6 +38,20 @@ public class ThreadController {
             return "threadForm";
         }
         threadService.presave(thread, authentication);
-        return "redirect:/threads";
+        return "redirect:/threads/" + thread.getId() ;
     }
+
+    @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.GET)
+    public String getThread(@PathVariable("threadId") Long threadId, Model model) {
+        model.addAttribute("findThread", threadService.findOne(threadId));
+        return "thread";
+    }
+
+
+
+    /* todo
+    wczytywanie danego tematu
+    usuwanie tematu
+    edytowanie tematu
+     */
 }

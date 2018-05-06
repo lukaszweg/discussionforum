@@ -7,7 +7,10 @@
 <a sec:authorize="isAuthenticated()" th:href="@{/threads/add}">DODAJ TEMAT</a>
 <table th:each="thread : ${threads}">
     <tr>
-        <td th:text="${thread.getThreadName()} + ' Author: ' + ${thread.getUserThread().getUsername()}"></td>
+        <td>
+            <a th:href="@{'/threads/' + ${thread.getId()}}" th:text="${thread.getThreadName()}"></a>
+            <a th:href="@{'/user/' + ${thread.getUserThread().getUsername()}}" th:text="${thread.getUserThread().getUsername()}"></a>
+        </td>
     </tr>
 </table>
 </body>
