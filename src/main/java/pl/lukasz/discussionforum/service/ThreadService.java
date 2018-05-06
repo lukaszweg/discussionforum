@@ -12,4 +12,6 @@ public interface ThreadService {
     Thread presave(Thread thread, Authentication authentication);
 
     Optional<Thread> findOne(Long threadId);
+
+    void delete(Long threadId, Authentication authentication);
 }

@@ -2,9 +2,12 @@ package pl.lukasz.discussionforum.service.implementation;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import pl.lukasz.discussionforum.entity.Role;
 import pl.lukasz.discussionforum.entity.Thread;
+import pl.lukasz.discussionforum.entity.User;
 import pl.lukasz.discussionforum.repository.ThreadRepository;
 import pl.lukasz.discussionforum.repository.UserRepository;
+import pl.lukasz.discussionforum.service.RoleService;
 import pl.lukasz.discussionforum.service.ThreadService;
 import pl.lukasz.discussionforum.service.UserService;
 
@@ -17,10 +20,13 @@ public class ThreadServiceImpl implements ThreadService {
 
     private ThreadRepository threadRepository;
     private UserService userService;
+    private RoleService roleService;
 
-    public ThreadServiceImpl(ThreadRepository threadRepository, UserService userService) {
+
+    public ThreadServiceImpl(ThreadRepository threadRepository, UserService userService, RoleService roleService) {
         this.threadRepository = threadRepository;
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -39,6 +45,17 @@ public class ThreadServiceImpl implements ThreadService {
     @Override
     public Optional<Thread> findOne(Long threadId) {
         return threadRepository.findById(threadId);
+    }
+
+    @Override
+    public void delete(Long threadId, Authentication authentication) {
+        String auth = authentication.getName();
+        String user = threadRepository.findById(threadId).get().getUserThread().getUsername();
+        User admin = userService.findByUsername(auth);
+        Role role = roleService.findByName("ADMIN");
+        if(auth.equals(user) || admin.getRoles().contains(role)) {
+            threadRepository.deleteById(threadId);
+        }
     }
 }
 

@@ -46,6 +46,11 @@ public class ThreadController {
         model.addAttribute("findThread", threadService.findOne(threadId));
         return "thread";
     }
+    @RequestMapping(value = "/threads/{threadId}/delete", method = RequestMethod.GET)
+    public String deleteThread(@PathVariable("threadId") Long threadId, Authentication authentication) {
+        threadService.delete(threadId, authentication);
+        return "redirect:/threads";
+    }
 
 
 
