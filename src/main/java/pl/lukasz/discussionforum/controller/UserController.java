@@ -87,6 +87,7 @@ public class UserController {
         return "user";
         /* todo
         dodać nowe pojo w którym będą zawarte posty i tematy użytkownika i je wyświetla.
+        edytowanie uzytkownika przez administratora/ jego samego
          */
     }
 }

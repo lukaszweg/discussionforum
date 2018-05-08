@@ -58,6 +58,17 @@ public class ThreadServiceImpl implements ThreadService {
         }
     }
 
+    @Override
+    public Thread findById(Long threadId) {
+        Optional<Thread> thread = threadRepository.findById(threadId);
+        if(thread.isPresent())
+        {
+            return thread.get();
+        }
+
+        return null;
+
+    }
 
 //    @Override
 //    public Optional<Thread> update(Long threadId, Authentication authentication) {

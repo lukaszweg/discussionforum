@@ -1,9 +1,11 @@
 package pl.lukasz.discussionforum.entity;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 public class Post {
@@ -14,6 +16,10 @@ public class Post {
     @Lob
     @NotNull
     private String content;
+
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime createDate;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
@@ -27,6 +33,13 @@ public class Post {
 
     public Post(@NotNull String content, User userPost, Thread threadPost) {
         this.content = content;
+        this.userPost = userPost;
+        this.threadPost = threadPost;
+    }
+
+    public Post(@NotNull String content, @NotNull LocalDateTime createDate, User userPost, Thread threadPost) {
+        this.content = content;
+        this.createDate = createDate;
         this.userPost = userPost;
         this.threadPost = threadPost;
     }
@@ -71,5 +84,13 @@ public class Post {
                 ", userPost=" + userPost +
                 ", threadPost=" + threadPost +
                 '}';
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 }

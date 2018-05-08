@@ -8,16 +8,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.lukasz.discussionforum.entity.Post;
 import pl.lukasz.discussionforum.entity.Thread;
+import pl.lukasz.discussionforum.service.PostService;
 import pl.lukasz.discussionforum.service.ThreadService;
 
 @Controller
 public class ThreadController {
 
     private ThreadService threadService;
+    private PostService postService;
 
-    public ThreadController(ThreadService threadService) {
+    public ThreadController(ThreadService threadService, PostService postService) {
         this.threadService = threadService;
+        this.postService = postService;
     }
 
     @RequestMapping("/threads")
@@ -44,12 +48,23 @@ public class ThreadController {
     @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.GET)
     public String getThread(@PathVariable("threadId") Long threadId, Model model) {
         model.addAttribute("findThread", threadService.findOne(threadId));
+        model.addAttribute("allPosts", postService.findAllByThreadAndOrderByCreateDate(threadId));
+        model.addAttribute("post", new Post());
         return "thread";
     }
     @RequestMapping(value = "/threads/{threadId}/delete", method = RequestMethod.GET)
     public String deleteThread(@PathVariable("threadId") Long threadId, Authentication authentication) {
         threadService.delete(threadId, authentication);
         return "redirect:/threads";
+    }
+    /** todo
+     * Edytowanie postu
+     */
+
+    @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.POST)
+    public String addPost(@PathVariable("threadId") Long threadId,@ModelAttribute("post") Post post, Authentication authentication) {
+        postService.precreate(post, threadId, authentication);
+        return "redirect:/threads/" + threadId;
     }
 
 
