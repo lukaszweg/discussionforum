@@ -67,6 +67,12 @@ public class ThreadController {
         return "redirect:/threads/" + threadId;
     }
 
+    @RequestMapping(value = "/threads/{threadId}/delete/{postId}")
+    public String addPost(@PathVariable("threadId") Long threadId,@PathVariable("postId") Long postId,Authentication authentication) {
+        postService.deletePost(postId, authentication);
+        return "redirect:/threads/" + threadId;
+    }
+
 
     }
 

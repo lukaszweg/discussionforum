@@ -10,8 +10,11 @@
 <a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete'}" >USUN</a>
 <div th:each="post : ${allPosts}">
     <p th:text="${post.getContent()}"></p>
+    <a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>
     <p></p>
 </div>
+
 <div sec:authorize="isAuthenticated()" >
     <form th:object="${post}" th:action="@{${findThread.get().getId()}}" method="post">
         <input th:field="*{content}">

@@ -11,5 +11,7 @@ public interface PostService {
 
     List<Post> findAllByThreadAndOrderByCreateDate(Long threadId);
 
+    void deletePost(Long postId, Authentication authentication);
+
 
 }
