@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.lukasz.discussionforum.entity.Post;
 import pl.lukasz.discussionforum.entity.Thread;
+import pl.lukasz.discussionforum.entity.User;
 import pl.lukasz.discussionforum.service.PostService;
 import pl.lukasz.discussionforum.service.ThreadService;
 
@@ -52,14 +53,13 @@ public class ThreadController {
         model.addAttribute("post", new Post());
         return "thread";
     }
+
     @RequestMapping(value = "/threads/{threadId}/delete", method = RequestMethod.GET)
     public String deleteThread(@PathVariable("threadId") Long threadId, Authentication authentication) {
         threadService.delete(threadId, authentication);
         return "redirect:/threads";
     }
-    /** todo
-     * Edytowanie postu
-     */
+
 
     @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.POST)
     public String addPost(@PathVariable("threadId") Long threadId,@ModelAttribute("post") Post post, Authentication authentication) {
@@ -87,6 +87,24 @@ public class ThreadController {
     public String saveEditedThread(@PathVariable("threadId") Long threadId ,@ModelAttribute("editthread") Thread thread, Authentication authentication) {
         threadService.presaveEdited(thread, threadId, authentication);
         return "redirect:/threads/" + threadId;
+    }
+
+    @RequestMapping(value = "/threads/{threadId}/{postId}/editpost", method = RequestMethod.GET)
+    public String editPost(@PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId, Model model, Authentication authentication)
+    {
+        if(authentication.getName().equals(postService.findById(postId).getUserPost().getUsername()))
+        {
+            Post post = postService.findById(postId);
+            model.addAttribute("editPost", post);
+            return "forms/editPostForm";
+        }
+        return "redirect:/threads/" + threadId;
+    }
+
+    @RequestMapping(value = "/threads/{threadId}/{postId}/editpost", method = RequestMethod.POST)
+    public String saveEditedPost(@PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId, Model model, Authentication authentication,@ModelAttribute("editPost") Post post) {
+        postService.presaveEdited(post,postId,threadId,authentication);
+        return "redirect:/threads/{threadId}";
     }
 
 

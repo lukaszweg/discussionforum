@@ -13,5 +13,8 @@ public interface PostService {
 
     void deletePost(Long postId, Authentication authentication);
 
+    Post findById(Long id);
+
+    Post presaveEdited(Post post, Long postId, Long threadId, Authentication authentication);
 
 }

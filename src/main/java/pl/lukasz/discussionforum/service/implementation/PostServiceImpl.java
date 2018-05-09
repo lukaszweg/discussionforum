@@ -14,6 +14,7 @@ import pl.lukasz.discussionforum.service.RoleService;
 import pl.lukasz.discussionforum.service.ThreadService;
 import pl.lukasz.discussionforum.service.UserService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +59,25 @@ public class PostServiceImpl implements PostService {
         if(username.equals(auth) || admin.getRoles().contains(role)){
             postRepository.deleteById(postId);
         }
+    }
+
+    @Override
+    public Post findById(Long id) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isPresent())
+        {
+            return  post.get();
+        }
+
+        return null;
+    }
+
+    @Override
+    public Post presaveEdited(Post post, Long postId, Long threadId, Authentication authentication) {
+        post.setId(postId);
+        post.setUserPost(userService.findByUsername(authentication.getName()));
+        post.setThreadPost(threadService.findById(threadId));
+        post.setCreateDate(LocalDateTime.now());
+        return postRepository.save(post);
     }
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="site/head :: head">
+</head>
+<body>
+<nav th:replace="site/navbar :: navbar"></nav>
+<form th:object="${editPost}" th:action='@{editpost}' method="post">
+    <input th:field="*{content}" />
+    <button type="submit"></button>
+</form>
+
+</body>
+</html>
