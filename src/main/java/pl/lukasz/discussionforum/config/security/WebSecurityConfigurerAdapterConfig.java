@@ -24,7 +24,8 @@ public class WebSecurityConfigurerAdapterConfig extends WebSecurityConfigurerAda
 
 
     private static final String[] FOR_AUTHORIZED_USERS =
-            {"/user/**", "/profile/**", "/threads/add/**", "/threads/{id}/delete/**" };
+            {"/user/**", "/profile/**", "/threads/add/**", "/threads/{id}/delete/**", "/threads/{id}/editthread"  };
+
     private static final String[] FOR_ADMINS =
             {"/users/**"};
     private static final String[] ADMINS_ROLES =

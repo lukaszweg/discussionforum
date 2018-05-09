@@ -70,14 +70,13 @@ public class ThreadServiceImpl implements ThreadService {
 
     }
 
-//    @Override
-//    public Optional<Thread> update(Long threadId, Authentication authentication) {
-//        String auth = authentication.getName();
-//        String user = threadRepository.findById(threadId).get().getUserThread().getUsername();
-//        if(auth.equals(user)) {
-//            return threadRepository.findById(threadId);
-//        }
-//        return null;
-//    }
+    @Override
+    public Thread presaveEdited(Thread thread, Long threadId, Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
+        thread.setUserThread(user);
+        thread.setId(threadId);
+        thread.setCreateDate(LocalDate.now());
+        return threadRepository.save(thread);
+    }
 }
 

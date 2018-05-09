@@ -17,6 +17,8 @@ public interface ThreadService {
 
     Thread findById(Long threadId);
 
+    Thread presaveEdited(Thread thread, Long threadId, Authentication authentication);
+
 
 //    Optional<Thread> update(Long threadId, Authentication authentication);
 }

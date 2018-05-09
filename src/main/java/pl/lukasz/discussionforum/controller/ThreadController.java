@@ -73,6 +73,22 @@ public class ThreadController {
         return "redirect:/threads/" + threadId;
     }
 
+    @RequestMapping(value = "/threads/{threadId}/editthread")
+    public String editThraed(@PathVariable("threadId") Long threadId, Model model,Authentication authentication) {
+        Thread thread = threadService.findById(threadId);
+        if(authentication.getName().equals(thread.getUserThread().getUsername())) {
+            model.addAttribute("editthread", thread);
+            return "forms/editThreadForm";
+        }
+        return "redirect:/threads/" + threadId;
+    }
+
+    @RequestMapping(value = "/threads/{threadId}/editthread", method = RequestMethod.POST)
+    public String saveEditedThread(@PathVariable("threadId") Long threadId ,@ModelAttribute("editthread") Thread thread, Authentication authentication) {
+        threadService.presaveEdited(thread, threadId, authentication);
+        return "redirect:/threads/" + threadId;
+    }
+
 
     }
 
