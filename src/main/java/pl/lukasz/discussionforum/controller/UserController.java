@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.lukasz.discussionforum.entity.Role;
 import pl.lukasz.discussionforum.entity.User;
+import pl.lukasz.discussionforum.service.RoleService;
 import pl.lukasz.discussionforum.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
 
     private UserService userService;
+    private RoleService roleService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -90,4 +93,10 @@ public class UserController {
         edytowanie uzytkownika przez administratora/ jego samego
          */
     }
+
+    @RequestMapping(value = "/user/{userId}/edit", method = RequestMethod.GET)
+    public String editUser(@PathVariable("userId") Long userId, Authentication authentication) {
+        return null;
+    }
+
 }
