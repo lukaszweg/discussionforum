@@ -5,6 +5,8 @@
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
 <form th:object="${editPost}" th:action='@{editpost}' method="post">
+    <input th:field="*{id}" type="hidden"/>
+    <input th:field="*{createDate}" type="hidden" />
     <input th:field="*{content}" />
     <button type="submit"></button>
 </form>

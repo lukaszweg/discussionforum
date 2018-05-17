@@ -74,8 +74,6 @@ public class ThreadServiceImpl implements ThreadService {
     public Thread presaveEdited(Thread thread, Long threadId, Authentication authentication) {
         User user = userService.findByUsername(authentication.getName());
         thread.setUserThread(user);
-        thread.setId(threadId);
-        thread.setCreateDate(LocalDate.now());
         return threadRepository.save(thread);
     }
 }

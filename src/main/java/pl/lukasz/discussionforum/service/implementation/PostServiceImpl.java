@@ -74,10 +74,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post presaveEdited(Post post, Long postId, Long threadId, Authentication authentication) {
-        post.setId(postId);
         post.setUserPost(userService.findByUsername(authentication.getName()));
         post.setThreadPost(threadService.findById(threadId));
-        post.setCreateDate(LocalDateTime.now());
         return postRepository.save(post);
     }
 }
