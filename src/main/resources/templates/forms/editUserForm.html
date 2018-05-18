@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="site/head :: head">
 </head>
 <body>
+<nav th:replace="site/navbar :: navbar"></nav>
+<form th:object="${editUser}" th:action="@{edit}" method="post" >
+    <input th:field="*{id}" type="hidden" />
+    <!--<input th:form="*{thread}" type="hidden"/>-->
+    <!--<input th:form="*{post}" type="hidden"/>-->
+    <label for="login">login</label>
+    <input id="login" th:field="*{username}" type="text"/>
+    <label for="email">email</label>
+    <input id="email" th:field="*{email}" type="email"/>
+    <label for="password">password</label>
+    <input id="password" th:field="*{password}" type="password" />
+    <button type="submit">Zapisz</button>
+</form>
 
 </body>
 </html>

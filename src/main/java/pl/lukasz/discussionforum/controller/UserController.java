@@ -23,8 +23,9 @@ public class UserController {
     private UserService userService;
     private RoleService roleService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -95,8 +96,26 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{userId}/edit", method = RequestMethod.GET)
-    public String editUser(@PathVariable("userId") Long userId, Authentication authentication) {
-        return null;
+    public String editUser(@PathVariable("userId") Long userId, Authentication authentication, Model model) {
+        if(authentication.getName().equals(userService.findOneUserById(userId).get().getUsername())
+                || userService.findByUsername(authentication.getName()).getRoles().contains(roleService.findByName("ADMIN"))) {
+
+            User user = userService.findOneUserById(userId).get();
+            model.addAttribute("editUser", user);
+            return "forms/editUserForm";
+        }
+        return "redirect:/";
+
+    }
+
+    @RequestMapping(value = "/user/{userId}/edit", method = RequestMethod.POST)
+    public String saveEditedUser(@PathVariable("userId") Long userId,@ModelAttribute("editUser") User user, BindingResult bindingResult, Authentication authentication,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        if(bindingResult.hasErrors()) {
+            return "editUserThread";
+        }
+        userService.presave(user);
+        logout(authentication, httpServletRequest, httpServletResponse);
+        return "redirect:/login";
     }
 
 }
