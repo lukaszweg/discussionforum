@@ -14,6 +14,8 @@ import pl.lukasz.discussionforum.entity.User;
 import pl.lukasz.discussionforum.service.PostService;
 import pl.lukasz.discussionforum.service.ThreadService;
 
+import javax.validation.Valid;
+
 @Controller
 public class ThreadController {
 
@@ -38,9 +40,9 @@ public class ThreadController {
     }
 
     @RequestMapping(value = "/threads/add", method = RequestMethod.POST)
-    public String saveThread(@ModelAttribute("newThread") Thread thread, BindingResult bindingResult, Authentication authentication) {
+    public String saveThread(@Valid @ModelAttribute("newThread") Thread thread, BindingResult bindingResult, Authentication authentication) {
         if(bindingResult.hasErrors()) {
-            return "threadForm";
+            return "forms/threadForm";
         }
         threadService.presave(thread, authentication);
         return "redirect:/threads/" + thread.getId() ;
@@ -63,12 +65,13 @@ public class ThreadController {
 
     @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.POST)
     public String addPost(@PathVariable("threadId") Long threadId,@ModelAttribute("post") Post post, Authentication authentication) {
+
         postService.precreate(post, threadId, authentication);
         return "redirect:/threads/" + threadId;
     }
 
     @RequestMapping(value = "/threads/{threadId}/delete/{postId}")
-    public String addPost(@PathVariable("threadId") Long threadId,@PathVariable("postId") Long postId,Authentication authentication) {
+    public String deletePost(@PathVariable("threadId") Long threadId,@PathVariable("postId") Long postId,Authentication authentication) {
         postService.deletePost(postId, authentication);
         return "redirect:/threads/" + threadId;
     }
@@ -85,6 +88,7 @@ public class ThreadController {
 
     @RequestMapping(value = "/threads/{threadId}/editthread", method = RequestMethod.POST)
     public String saveEditedThread(@PathVariable("threadId") Long threadId ,@ModelAttribute("editthread") Thread thread, Authentication authentication) {
+
         threadService.presaveEdited(thread, threadId, authentication);
         return "redirect:/threads/" + threadId;
     }
@@ -102,7 +106,8 @@ public class ThreadController {
     }
 
     @RequestMapping(value = "/threads/{threadId}/{postId}/editpost", method = RequestMethod.POST)
-    public String saveEditedPost(@PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId, Model model, Authentication authentication,@ModelAttribute("editPost") Post post) {
+    public String saveEditedPost(@PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId, Model model, Authentication authentication, @ModelAttribute("editPost") Post post) {
+
         postService.presaveEdited(post,postId,threadId,authentication);
         return "redirect:/threads/{threadId}";
     }

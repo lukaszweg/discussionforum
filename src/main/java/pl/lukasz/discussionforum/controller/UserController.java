@@ -16,6 +16,7 @@ import pl.lukasz.discussionforum.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @RequestMapping(value ="/register", method = RequestMethod.POST)
-    public String saveNewUser(@ModelAttribute("user") User user, BindingResult result) {
+    public String saveNewUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if(result.hasErrors()) {
             return "forms/registerForm";
         }
@@ -109,9 +110,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{userId}/edit", method = RequestMethod.POST)
-    public String saveEditedUser(@PathVariable("userId") Long userId,@ModelAttribute("editUser") User user, BindingResult bindingResult, Authentication authentication,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public String saveEditedUser( @PathVariable("userId") Long userId,@Valid @ModelAttribute("editUser") User user, BindingResult bindingResult, Authentication authentication,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         if(bindingResult.hasErrors()) {
-            return "editUserThread";
+            return "forms/editUserForm";
         }
         userService.presave(user);
         logout(authentication, httpServletRequest, httpServletResponse);
