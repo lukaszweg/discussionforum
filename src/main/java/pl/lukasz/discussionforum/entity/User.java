@@ -1,6 +1,10 @@
 package pl.lukasz.discussionforum.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
@@ -11,19 +15,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Length(min = 5)
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Length(min = 6)
     @Column(nullable = false)
     private String password;
 
+    @Email
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "userPost")
+    @OneToMany(mappedBy = "userPost", cascade = CascadeType.ALL)
     private List<Post> post;
 
-    @OneToMany(mappedBy = "userThread")
+    @OneToMany(mappedBy = "userThread", cascade = CascadeType.ALL)
     private List<Thread> thread;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

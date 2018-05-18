@@ -6,12 +6,11 @@ import pl.lukasz.discussionforum.entity.Role;
 import pl.lukasz.discussionforum.entity.Thread;
 import pl.lukasz.discussionforum.entity.User;
 import pl.lukasz.discussionforum.repository.ThreadRepository;
-import pl.lukasz.discussionforum.repository.UserRepository;
 import pl.lukasz.discussionforum.service.RoleService;
 import pl.lukasz.discussionforum.service.ThreadService;
 import pl.lukasz.discussionforum.service.UserService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class ThreadServiceImpl implements ThreadService {
 
     @Override
     public Thread presave(Thread thread, Authentication authentication) {
-        LocalDate getDate = LocalDate.now();
+        LocalDateTime getDate = LocalDateTime.now();
         thread.setCreateDate(getDate);
         thread.setUserThread(userService.findByUsername(authentication.getName()));
         return threadRepository.save(thread);

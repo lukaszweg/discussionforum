@@ -11,6 +11,8 @@
         </td>
         <td>
            <a th:href="@{'users/delete/' + ${user.getId()}}"> <button th:text="usuń"></button></a>
+            <a th:href="@{'/user/' + ${user.getId()} + '/edit'}"> <button th:text="edytuj"></button></a>
+
         </td>
     </tr>
 </table>

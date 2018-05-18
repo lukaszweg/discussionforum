@@ -49,7 +49,7 @@ public class UserController {
     @RequestMapping(value ="/register", method = RequestMethod.POST)
     public String saveNewUser(@ModelAttribute("user") User user, BindingResult result) {
         if(result.hasErrors()) {
-            return "registerForm";
+            return "forms/registerForm";
         }
         userService.presave(user);
         return "redirect:/login";
