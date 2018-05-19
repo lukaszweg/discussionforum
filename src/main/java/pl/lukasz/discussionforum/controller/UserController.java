@@ -90,10 +90,7 @@ public class UserController {
         user = userService.findByUsername(authentication.getName());
         model.addAttribute("user", user);
         return "user";
-        /* todo
-        dodać nowe pojo w którym będą zawarte posty i tematy użytkownika i je wyświetla.
-        edytowanie uzytkownika przez administratora/ jego samego
-         */
+
     }
 
     @RequestMapping(value = "/user/{userId}/edit", method = RequestMethod.GET)

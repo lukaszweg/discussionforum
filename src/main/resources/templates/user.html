@@ -6,5 +6,6 @@
 <nav th:replace="site/navbar :: navbar"></nav>
 <h1 th:text="${user.getUsername()}"></h1>
 <a th:if="${#authentication.getName()} eq ${user.getUsername()}" th:href="@{'/user/'+ ${user.getId()} + '/edit'}">Edytuj</a>
+<footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>

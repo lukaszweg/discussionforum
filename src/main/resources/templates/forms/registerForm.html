@@ -4,15 +4,19 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-<form th:object="${user}" th:action='@{/register}' method="post">
-    <label for="username" >LOGIN</label>
-    <input id="username" th:field="*{username}" name="username" type="text"/>
-    <label for="password">HASłO</label>
-    <input id="password" th:field="*{password}" name="password" type="password"/>
-    <label for="email">EMAIL</label>
-    <input id="email" th:field="*{email}" name="email" type="email"/>
-    <input class="btn waves-effect waves-light" type="submit" name="action" value="Register" />
+<form th:object="${user}" th:action='@{/register}' method="post" class="formalign">
+    <div class="form-group">
+        <h1 class="display-4">Rejestracja</h1>
+    <label for="username" >Podaj login:</label>
+    <input id="username" th:field="*{username}" name="username" type="text" class="form-control"/>
+    <label for="password">Podaj hasło:</label>
+    <input id="password" th:field="*{password}" name="password" type="password" class="form-control"/>
+    <label for="email">Podaj email:</label>
+    <input id="email" th:field="*{email}" name="email" type="email" class="form-control"/>
+        <p></p>
+    <input class="btn btn-info" type="submit" name="action" value="Zarejestruj" />
+    </div>
 </form>
-
+<footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>

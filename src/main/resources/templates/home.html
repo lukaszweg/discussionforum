@@ -5,10 +5,12 @@
 <body>
     <nav th:replace="site/navbar :: navbar"></nav>
     <p></p>
+
     <table th:each="thread : ${threads}">
         <tr>
             <td th:text="${thread.getThreadName()} + ' Author: ' + ${thread.getUserThread().getUsername()}"></td>
         </tr>
     </table>
+    <footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>
