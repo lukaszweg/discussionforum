@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ThreadService {
     List<Thread> findAllAndOrderByCreationType();
 
+    List<Thread> findFiveNewestThreads();
+
     Thread presave(Thread thread, Authentication authentication);
 
     Optional<Thread> findOne(Long threadId);

@@ -16,6 +16,7 @@ import pl.lukasz.discussionforum.service.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,5 +78,18 @@ public class PostServiceImpl implements PostService {
         post.setUserPost(userService.findByUsername(authentication.getName()));
         post.setThreadPost(threadService.findById(threadId));
         return postRepository.save(post);
+    }
+
+    @Override
+    public List<Post> findFiveNewestPosts() {
+        List<Post> list = postRepository.findAllByOrderByCreateDateDesc();
+        List<Post> newest = new ArrayList<>();
+        for(Post post: list) {
+            newest.add(post);
+            if(newest.size() == 5){
+                break;
+            }
+        }
+        return newest;
     }
 }

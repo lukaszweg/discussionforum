@@ -5,6 +5,52 @@
 
 }
 
+.table.one {
+    margin-left: 8%;
+    max-width: 40%;
+    min-width: 40%;
+    table-layout: fixed;
+
+}
+
+.table.two {
+    margin-left: 4%;
+    max-width: 40%;
+    min-width: 40%;
+    margin-right: 8%;
+    table-layout: fixed;
+}
+
+
+
+.bodythread {
+    background-color: white;
+    table-layout: fixed;
+
+
+}
+
+.bodythread a h6 {
+    margin-top: -5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: -3px;
+}
+.bodythread h6 {
+    margin-top: -5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: -3px;
+}
+
+.bodythread a {
+    font-size: 12px;
+    margin-bottom: 0px;
+
+
+}
 .formalign {
     display: flex;
     justify-content: center;

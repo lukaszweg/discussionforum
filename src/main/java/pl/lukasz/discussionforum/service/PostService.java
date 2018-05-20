@@ -17,4 +17,6 @@ public interface PostService {
 
     Post presaveEdited(Post post, Long postId, Long threadId, Authentication authentication);
 
+    List<Post> findFiveNewestPosts();
+
 }

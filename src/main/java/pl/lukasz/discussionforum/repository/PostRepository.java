@@ -13,4 +13,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findAllByThreadPostOrderByCreateDateAsc(Thread thread);
 
+    List<Post> findAllByOrderByCreateDateDesc();
+
 }

@@ -5,12 +5,42 @@
 <body>
     <nav th:replace="site/navbar :: navbar"></nav>
     <p></p>
-
-    <table th:each="thread : ${threads}">
-        <tr>
-            <td th:text="${thread.getThreadName()} + ' Author: ' + ${thread.getUserThread().getUsername()}"></td>
-        </tr>
-    </table>
+    <div class="container-fluid" >
+        <div class="row content">
+            <table class="table one" >
+                <thead class="thead-dark" >
+                <tr>
+                    <th>Najnowsze tematy</th>
+                </tr>
+                </thead>
+                <tbody th:each="thread : ${threads}" class="bodythread">
+                <tr>
+                    <td >
+                        <a th:href="@{'/threads/' + ${thread.id}}"><h6 th:text="${thread.threadName}" >"</h6> </a>
+                        <a th:href="@{'/user/'+ ${thread.userThread.getUsername()}}" th:text="${thread.userThread.getUsername()}"></a>
+                        <small style="float: right" th:text="${#temporals.format(thread.createDate, 'dd-MM-yyy, HH:mm')}"></small>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table two" >
+                <thead class="thead-dark">
+                <tr>
+                    <th>Najnowsze posty</th>
+                </tr>
+                </thead>
+                <tbody th:each="post : ${posts}" class="bodythread">
+                <tr>
+                    <td >
+                        <h6 th:text="${post.content}"></h6>
+                        <a th:href="@{'/threads/'+ ${post.threadPost.getId()}}" th:text="${post.threadPost.getThreadName()}"></a>
+                        <small style="float: right" th:text="${#temporals.format(post.createDate, 'dd-MM-yyy, HH:mm')}"></small>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>

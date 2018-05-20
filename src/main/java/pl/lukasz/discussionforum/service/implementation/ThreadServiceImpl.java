@@ -11,6 +11,7 @@ import pl.lukasz.discussionforum.service.ThreadService;
 import pl.lukasz.discussionforum.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,20 @@ public class ThreadServiceImpl implements ThreadService {
         User user = userService.findByUsername(authentication.getName());
         thread.setUserThread(user);
         return threadRepository.save(thread);
+    }
+
+    @Override
+    public List<Thread> findFiveNewestThreads() {
+        List<Thread> List = threadRepository.findAllByOrderByCreateDateDesc();
+        List<Thread> newest = new ArrayList<>();
+        for(Thread thread: List) {
+            newest.add(thread);
+            if(newest.size() == 5)
+            {
+                break;
+            }
+        }
+        return newest;
     }
 }
 

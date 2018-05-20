@@ -42,7 +42,10 @@ public class UserController {
     }
 
     @RequestMapping(value ="/register", method = RequestMethod.GET)
-    public String registerNewUser(Model model) {
+    public String registerNewUser(Model model, Authentication authentication) {
+        if(authentication != null) {
+            return "redirect:/";
+        }
         model.addAttribute("user", new User());
         return "forms/registerForm";
     }
