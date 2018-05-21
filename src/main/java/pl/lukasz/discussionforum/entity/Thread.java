@@ -15,11 +15,14 @@ public class Thread {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+
+    @Length(min = 5, max = 60)
+    @Column(nullable = false)
     private String threadName;
 
+    @Length(min = 10, max = 1000)
     @Lob
-    @NotNull
+    @Column(nullable = false)
     private String description;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

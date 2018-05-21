@@ -19,6 +19,7 @@
 
 <div sec:authorize="isAuthenticated()" >
     <form th:object="${post}" th:action="@{${findThread.get().getId()}}" method="post">
+        <input type="hidden" th:field="*{id}"/>
         <input th:field="*{content}">
         <button type="submit"></button>
     </form>

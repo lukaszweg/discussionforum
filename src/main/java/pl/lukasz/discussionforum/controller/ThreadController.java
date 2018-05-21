@@ -64,8 +64,11 @@ public class ThreadController {
 
 
     @RequestMapping(value = "/threads/{threadId}", method = RequestMethod.POST)
-    public String addPost(@PathVariable("threadId") Long threadId,@ModelAttribute("post") Post post, Authentication authentication) {
-
+    public String addPost(@Valid @ModelAttribute("post") Post post, BindingResult bindingResult, Authentication authentication, @PathVariable("threadId") Long threadId) {
+        if(bindingResult.hasErrors())
+        {
+            return "redirect:/threads/" + threadId;
+        }
         postService.precreate(post, threadId, authentication);
         return "redirect:/threads/" + threadId;
     }
@@ -87,8 +90,11 @@ public class ThreadController {
     }
 
     @RequestMapping(value = "/threads/{threadId}/editthread", method = RequestMethod.POST)
-    public String saveEditedThread(@PathVariable("threadId") Long threadId ,@ModelAttribute("editthread") Thread thread, Authentication authentication) {
-
+    public String saveEditedThread(@Valid @ModelAttribute("editthread") Thread thread, BindingResult bindingResult, Authentication authentication, @PathVariable("threadId") Long threadId) {
+        if(bindingResult.hasErrors())
+        {
+            return "forms/editThreadForm";
+        }
         threadService.presaveEdited(thread, threadId, authentication);
         return "redirect:/threads/" + threadId;
     }
@@ -106,8 +112,11 @@ public class ThreadController {
     }
 
     @RequestMapping(value = "/threads/{threadId}/{postId}/editpost", method = RequestMethod.POST)
-    public String saveEditedPost(@PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId, Model model, Authentication authentication, @ModelAttribute("editPost") Post post) {
-
+    public String saveEditedPost(@Valid @ModelAttribute("editPost") Post post, BindingResult bindingResult, Authentication authentication, @PathVariable("threadId") Long threadId, @PathVariable("postId") Long postId) {
+        if(bindingResult.hasErrors())
+        {
+            return "forms/editPostForm";
+        }
         postService.presaveEdited(post,postId,threadId,authentication);
         return "redirect:/threads/{threadId}";
     }

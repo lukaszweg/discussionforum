@@ -15,10 +15,11 @@ public class Post {
     private Long id;
 
     @Lob
-    @NotNull
+    @Length(max = 300, min = 5)
+    @Column(nullable = false)
     private String content;
 
-    @NotNull
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime createDate;
 
