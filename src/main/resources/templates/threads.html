@@ -4,15 +4,36 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-<a sec:authorize="isAuthenticated()" th:href="@{/threads/add}">DODAJ TEMAT</a>
-<table th:each="thread : ${threads}">
-    <tr>
-        <td>
-            <a th:href="@{'/threads/' + ${thread.getId()}}" th:text="${thread.getThreadName()}"></a>
-            <a th:href="@{'/user/' + ${thread.getUserThread().getUsername()}}" th:text="${thread.getUserThread().getUsername()}"></a>
-        </td>
-    </tr>
-</table>
+<p></p>
+<div class="container-fluid" >
+    <div class="row content">
+        <table class="table thread" >
+            <thead class="thead-dark" >
+            <tr>
+                <th >
+                    Tematy:
+                </th>
+                <th>
+                    <a sec:authorize="isAuthenticated()" href="/threads/add"><button class="btn btn-info thread">Nowy Temat</button></a>
+                </th>
+            </tr>
+            </thead>
+            <tbody th:each="thread : ${threads}" class="bodythread">
+            <tr>
+                <td class="threadrow">
+                    <a th:href="@{'/threads/' + ${thread.id}}"><h6 th:text="${thread.threadName}"  >"</h6> </a>
+
+                </td>
+                <td class="authorrow">
+                    <a th:href="@{'/user/'+ ${thread.userThread.getUsername()}}" th:text="${thread.userThread.getUsername()}" ></a>
+                    <p class="minimalmargin"></p>
+                    <small style="float: left" th:text="${#temporals.format(thread.createDate, 'dd-MM-yyy, HH:mm')}"></small>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>

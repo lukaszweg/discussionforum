@@ -5,6 +5,11 @@
 
 }
 
+.btn-info.thread {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+
 .table.one {
     margin-left: 8%;
     max-width: 40%;
@@ -26,9 +31,9 @@
 .bodythread {
     background-color: white;
     table-layout: fixed;
-
-
 }
+
+
 
 .bodythread a h6 {
     margin-top: -5px;
@@ -48,8 +53,31 @@
 .bodythread a {
     font-size: 12px;
     margin-bottom: 0px;
+}
+
+.table.thread {
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.threadrow {
+    width: 87%;
+    padding-bottom: -10px;
+}
+.authorrow {
+    width: 13%;
+}
+
+.authorrow a {
+    display:block;
+    margin-top: -10px;
+}
 
 
+.minimalmargin {
+    margin-bottom: 1px;
+    margin-top: -4px;
 }
 .formalign {
     display: flex;
