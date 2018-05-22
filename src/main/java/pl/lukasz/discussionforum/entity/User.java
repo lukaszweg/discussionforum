@@ -15,11 +15,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Length(min = 5, max = 30)
+
+    @Length(min = 5, max = 30, message = "Ilośc znaków od 5 do 30!")
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Length(min = 6)
+    @Length(min = 6, message = "Minimalna ilość znaków to 6!")
     @Column(nullable = false)
     private String password;
 

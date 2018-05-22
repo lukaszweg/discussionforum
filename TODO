@@ -1,10 +1,8 @@
 TODO
--Walidacja dla postow i tematatow (max znakow etc)
--Wywalanie dlaczego nie zalogowalo, nie zarejestrowalo
 -Lepsze edytowanie uzytkownika (podanie wiecej wartosci)
 -Zmiana hasla pod innym buttonem
--Dodanie usuwania/Edycji do profilow uzytkownikow
-- WYGLAD RESZTY
+- WYGLAD RESZTY (Dodanie butttonow itp)
+- Walidacja dla postow i tematow
 - pliki ktore zaladuja podstawowe bazy, i  rekordy w bazie dla testow
 - testy jednostkowe
 // SKONCZYC DO 10.06.2018
