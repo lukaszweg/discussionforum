@@ -15,7 +15,7 @@ public class Post {
     private Long id;
 
     @Lob
-    @Length(max = 300, min = 5)
+    @Length(max = 300, min = 5, message = "od 5 do 300 znaków!")
     @Column(nullable = false)
     private String content;
 

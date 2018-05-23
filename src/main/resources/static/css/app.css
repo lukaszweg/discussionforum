@@ -149,7 +149,8 @@
 
 body {
     margin: 0px;
-    background-image: url("../images/background.jpg")
+    background-image: url("../images/background.jpg");
+    background-repeat: repeat-y;
 }
 
 .container-fluid .footer {
@@ -160,5 +161,17 @@ body {
      left: 0;
      color: black;
      text-align: right;
+}
+
+.table.user
+{
+    display: flex;
+    justify-content: center;
+}
+
+.user-h3 {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
 }
 

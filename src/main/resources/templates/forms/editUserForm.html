@@ -4,22 +4,57 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
+<div class="container-fluid">
+    <h1 class="display-4 thread">Edytuj użytkownika</h1>
+    <p></p>
+    <h3 class="user-h3">Zmiana hasła:</h3>
+    <table class="table user">
+        <tbody style="background-color: white">
+        <form th:object="${editUser}" th:action="@{edit}" method="post" >
+        <tr>
+            <td>
 
-<form th:object="${editUser}" th:action="@{edit}" method="post" >
     <input th:field="*{id}" type="hidden" />
     <input th:field="*{username}" type="hidden"/>
     <input th:field="*{email}" type="hidden" />
-    <label for="password">password</label>
     <input id="password" th:field="*{password}" type="password" />
-    <button type="submit">Zapisz</button>
-</form>
-<form th:object="${editUser}" th:action="@{edit}" method="post" >
-    <input th:field="*{id}" type="hidden" />
-    <input th:field="*{username}" type="text"/>
-    <input th:field="*{email}" type="email" />
-    <input  th:field="*{password}" type="hidden" />
-    <button type="submit">Zapisz</button>
-</form>
-<footer th:replace="site/footer :: footer"></footer>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red">Niepoprawne hasło</p>
+            </td>
+        </tr>
+            <tr>
+                <td>
+    <button type="submit" style="margin-left: 32.5%">Zapisz</button></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+    <h3 class="user-h3">Zmiana nazwy użytkownika/emailu:</h3>
+    <table class="table user">
+        <tbody style="background-color: white">
+        <form th:object="${editUser}" th:action="@{edit}" method="post" >
+        <tr>
+            <td>
+            <input th:field="*{id}" type="hidden" />
+            <input th:field="*{username}" type="text"/>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red">Niepoprwny login</p>
+            </td>  </tr>
+            <tr>
+                <td>
+                <input th:field="*{email}" type="email" />
+                <input  th:field="*{password}" type="hidden" /></td>
+            </tr>
+            <tr>
+                <td>
+                <button type="submit" style="margin-left: 32.5%">Zapisz</button></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+
+
+
+
+
+<footer th:replace="site/footer :: footer"></footer></div>
 </body>
 </html>
