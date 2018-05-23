@@ -22,7 +22,8 @@
                 </thead>
                 <tbody th:each="user : ${users}" class="bodythread">
                 <tr>
-                    <td th:text="${user.getUsername()}">
+                    <td >
+                        <a th:href="@{'/user/' + ${user.getUsername()}}" th:text="${user.getUsername()}"></a>
                     </td>
                     <td>
                         <a th:href="@{'/user/' + ${user.getId()} + '/edit'}"> <button th:text="edytuj" class="btn btn-info"></button></a>

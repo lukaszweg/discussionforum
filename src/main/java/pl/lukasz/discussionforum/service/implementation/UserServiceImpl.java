@@ -1,5 +1,6 @@
 package pl.lukasz.discussionforum.service.implementation;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.lukasz.discussionforum.entity.Role;
@@ -40,6 +41,22 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+    }
+
+    @Override
+    public void presaveEdited(User user) {
+        String oldUser = userRepository.findById(user.getId()).get().getPassword();
+
+        if(oldUser.equals(user.getPassword()))
+        {
+            userRepository.save(user);
+        }
+        else
+        {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+        }
+
     }
 
     @Override

@@ -114,8 +114,11 @@ public class UserController {
         if(bindingResult.hasErrors()) {
             return "forms/editUserForm";
         }
-        userService.presave(user);
-        return "redirect:/";
+
+            userService.presaveEdited(user);
+            logout(authentication, httpServletRequest, httpServletResponse);
+            return "redirect:/login";
+
     }
 
 }

@@ -10,8 +10,10 @@
         <h1 class="display-4 thread">Nowy Temat</h1>
         <label for="name" class="center" >Nazwa(od 5 do 60 znaków):</label>
         <input th:field="*{threadName}" class="form-control thread" type="text" id="name"/>
+    <p th:if="${#fields.hasErrors('threadName')}" th:errors="*{threadName}" class="center" style="color: red">Niepoprwna nazwa</p>
         <label for="desc" class="center">Treść(min 5 znaków):</label>
         <textarea rows="10" th:field="*{description}" class="form-control thread" type="text" id="desc"/>
+    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="center" style="color: red">Niepoprwna zawartość</p>
         <p></p>
         <input class="btn btn-info thread" type="submit" name="action" value="Zapisz" />
 

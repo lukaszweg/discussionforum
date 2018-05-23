@@ -16,11 +16,11 @@ public class Thread {
     private Long id;
 
 
-    @Length(min = 5, max = 60)
+    @Length(min = 5, max = 60, message = "Ilość znaków od 5 do 60!")
     @Column(nullable = false)
     private String threadName;
 
-    @Length(min = 5)
+    @Length(min = 5, message = "Minimalna ilość znaków to 5!")
     @Lob
     @Column(nullable = false)
     private String description;

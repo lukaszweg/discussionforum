@@ -13,6 +13,13 @@
     <input id="password" th:field="*{password}" type="password" />
     <button type="submit">Zapisz</button>
 </form>
+<form th:object="${editUser}" th:action="@{edit}" method="post" >
+    <input th:field="*{id}" type="hidden" />
+    <input th:field="*{username}" type="text"/>
+    <input th:field="*{email}" type="email" />
+    <input  th:field="*{password}" type="hidden" />
+    <button type="submit">Zapisz</button>
+</form>
 <footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>
