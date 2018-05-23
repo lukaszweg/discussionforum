@@ -4,26 +4,31 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-<h1 th:text="${findThread.get().getThreadName()}"></h1>
-<p th:text="${findThread.get().getDescription()}"></p>
-<a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete'}"  >USUN</a>
-<a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete'}" >USUN</a>
-<a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/editthread'}"  >EDYTUJ</a>
-<div th:each="post : ${allPosts}">
-    <p th:text="${post.getContent()}"></p>
-    <a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>
-    <a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/' + ${post.getId()} + '/editpost'}">Edytuj post</a>
-    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>
-    <p></p>
-</div>
 
-<div sec:authorize="isAuthenticated()" >
-    <form th:object="${post}" th:action="@{${findThread.get().getId()}}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <input th:field="*{content}">
-        <button type="submit"></button>
-    </form>
-</div>
+
+
+   <!--</div>-->
+<!--</div>-->
+
+<!--<p th:text="${findThread.get().getDescription()}"></p>-->
+<!--<a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete'}"  >USUN</a>-->
+<!--<a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete'}" >USUN</a>-->
+<!--<a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/editthread'}"  >EDYTUJ</a>-->
+<!--<div th:each="post : ${allPosts}">-->
+    <!--<p th:text="${post.getContent()}"></p>-->
+    <!--<a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>-->
+    <!--<a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/' + ${post.getId()} + '/editpost'}">Edytuj post</a>-->
+    <!--<a sec:authorize="hasAuthority('ADMIN')" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN POST</a>-->
+    <!--<p></p>-->
+<!--</div>-->
+
+<!--<div sec:authorize="isAuthenticated()" >-->
+    <!--<form th:object="${post}" th:action="@{${findThread.get().getId()}}" method="post">-->
+        <!--<input type="hidden" th:field="*{id}"/>-->
+        <!--<input th:field="*{content}">-->
+        <!--<button type="submit"></button>-->
+    <!--</form>-->
+<!--</div>-->
 <footer th:replace="site/footer :: footer"></footer>
 </body>
 </html>

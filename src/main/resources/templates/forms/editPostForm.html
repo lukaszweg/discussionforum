@@ -4,6 +4,18 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
+<table class="table thread" >
+    <thead class="thead-dark" >
+    <tr>
+        <th >
+            Tematy:
+        </th>
+        <th>
+            <a sec:authorize="isAuthenticated()" href="/threads/add"><button class="btn btn-info thread">Nowy Temat</button></a>
+        </th>
+    </tr>
+    </thead>
+</table>
 <form th:object="${editPost}" th:action='@{editpost}' method="post">
     <input th:field="*{id}" type="hidden"/>
     <input th:field="*{createDate}" type="hidden" />

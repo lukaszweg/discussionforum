@@ -1,8 +1,4 @@
 TODO
--Lepsze edytowanie uzytkownika (podanie wiecej wartosci)
--Zmiana hasla pod innym buttonem
-- WYGLAD RESZTY (Dodanie butttonow itp)
+- WYGLAD RESZTY (Uzytkownicy, Nowy Temat, Temat, Edytuj Post, Edytuj Temat, Uzytkownik)
 - Walidacja dla postow i tematow
-- pliki ktore zaladuja podstawowe bazy, i  rekordy w bazie dla testow
-- testy jednostkowe
-// SKONCZYC DO 10.06.2018
+// SKONCZYC DO 25.05.2018

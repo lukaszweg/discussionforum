@@ -12,7 +12,7 @@
         <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Niepoprwny login</p>
     <label for="password">Podaj hasło (minimum 6 znaków):</label>
     <input id="password" th:field="*{password}" name="password" type="password" class="form-control"/>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Niepoprwne hasło</p>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Niepoprane hasło</p>
     <label for="email">Podaj email:</label>
     <input id="email" th:field="*{email}" name="email" type="email" class="form-control"/>
         <p></p>

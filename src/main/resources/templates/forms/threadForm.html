@@ -4,13 +4,19 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-<form th:object="${newThread}" th:action='@{add}' method="post">
-    <label for="threadName">Nazwa tematu</label>
-    <input th:field="*{threadName}" id="threadName" name="threadName" type="text"/>
-    <label for="description">Opis</label>
-    <input th:field="*{description}" id="description" name="description" type="text"/>
-    <input class="btn waves-effect waves-light" type="submit" name="action" value="Register" />
+<div class="container-fluid" >
+<form th:object="${newThread}" th:action='@{add}' method="post"  >
+
+        <h1 class="display-4 thread">Nowy Temat</h1>
+        <label for="name" class="center" >Nazwa(od 5 do 60 znaków):</label>
+        <input th:field="*{threadName}" class="form-control thread" type="text" id="name"/>
+        <label for="desc" class="center">Treść(min 5 znaków):</label>
+        <textarea rows="10" th:field="*{description}" class="form-control thread" type="text" id="desc"/>
+        <p></p>
+        <input class="btn btn-info thread" type="submit" name="action" value="Zarejestruj" />
+
 </form>
-<footer th:replace="site/footer :: footer"></footer>
+
+<footer th:replace="site/footer :: footer"></footer></div>
 </body>
 </html>

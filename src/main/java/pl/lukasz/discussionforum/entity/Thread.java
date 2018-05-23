@@ -20,7 +20,7 @@ public class Thread {
     @Column(nullable = false)
     private String threadName;
 
-    @Length(min = 10, max = 1000)
+    @Length(min = 5)
     @Lob
     @Column(nullable = false)
     private String description;

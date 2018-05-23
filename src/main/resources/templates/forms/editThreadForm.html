@@ -4,6 +4,7 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
+
 <form th:object="${editthread}" th:action='@{editthread}' method="post">
     <input th:field="*{id}" type="hidden" />
     <input th:field="*{createDate}" type="hidden" />

@@ -115,8 +115,7 @@ public class UserController {
             return "forms/editUserForm";
         }
         userService.presave(user);
-        logout(authentication, httpServletRequest, httpServletResponse);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 }

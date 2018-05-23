@@ -6,6 +6,25 @@
 }
 
 .btn-info.thread {
+    background-color: sandybrown;
+    border-color: sandybrown;
+    margin-left: 45%;
+
+
+}
+
+.container-fluid.thread {
+        margin: 5%;
+}
+
+
+
+.thread-name {
+    font-family: Arial;
+
+}
+
+.btn-info.threads {
     margin-top: -3px;
     margin-bottom: -3px;
 }
@@ -50,6 +69,21 @@
     margin-bottom: -3px;
 }
 
+.display-4.thread {
+    display: flex;
+    justify-content: center;
+}
+
+.form-control.thread {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
 .bodythread a {
     font-size: 12px;
     margin-bottom: 0px;
