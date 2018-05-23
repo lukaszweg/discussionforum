@@ -4,7 +4,7 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-
+<div class="container-fluid">
 <form  th:action="@{/login}" method="post" class="formalign">
 
     <div class="form-group" ><h1 class="display-4">Logowanie</h1>
@@ -16,6 +16,6 @@
     <input class="btn btn-info" type="submit" name="action" value="Zaloguj" align="right" />
     </div>
 </form>
-<footer th:replace="site/footer :: footer"></footer>
+<footer th:replace="site/footer :: footer"></footer></div>
 </body>
 </html>

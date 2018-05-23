@@ -4,18 +4,39 @@
 </head>
 <body>
     <nav th:replace="site/navbar :: navbar"></nav>
-<table th:each="user : ${users}">
-    <tr>
-        <td>
-            <a th:href="@{'user/' + ${user.getUsername()}}" th:text="${user.getUsername()}"></a>
-        </td>
-        <td>
-           <a th:href="@{'users/delete/' + ${user.getId()}}"> <button th:text="usuń"></button></a>
-            <a th:href="@{'/user/' + ${user.getId()} + '/edit'}"> <button th:text="edytuj"></button></a>
+    <div class="container-fluid" >
+        <div class="row content">
+            <table class="table thread" style="margin-top: 1.5%" >
+                <thead class="thead-dark" >
+                <tr>
+                    <th >
+                        Nazwa użytkownika
+                    </th>
+                    <th>
+                        Edytuj
+                    </th>
+                    <th>
+                        Usuń
+                    </th>
+                </tr>
+                </thead>
+                <tbody th:each="user : ${users}" class="bodythread">
+                <tr>
+                    <td th:text="${user.getUsername()}">
+                    </td>
+                    <td>
+                        <a th:href="@{'/user/' + ${user.getId()} + '/edit'}"> <button th:text="edytuj" class="btn btn-info"></button></a>
+                    </td>
+                    <td>
+                        <a th:href="@{'users/delete/' + ${user.getId()}}" > <button th:text="usuń" class="btn btn-danger"></button></a>
+                    </td>
 
-        </td>
-    </tr>
-</table>
-    <footer th:replace="site/footer :: footer"></footer>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer th:replace="site/footer :: footer"></footer>
+    </div>
+
 </body>
 </html>
