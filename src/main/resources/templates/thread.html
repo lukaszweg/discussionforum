@@ -4,7 +4,51 @@
 </head>
 <body>
 <nav th:replace="site/navbar :: navbar"></nav>
-
+<div class="container-fluid">
+    <h3 th:text="${findThread.get().getThreadName()}" style="margin: 5%"></h3>
+    <table style="margin-left: 5%; background-color: white; width: 90%; table-layout: fixed">
+        <tr style="border-collapse: collapse; border-bottom: 2px solid green">
+            <th style="width: 10%;">
+                <a th:text="${findThread.get().getUserThread().username}" th:href="@{'/user/' + ${findThread.get().getUserThread().username}}"></a>
+            </th>
+            <th >
+                <small th:text="${#temporals.format(findThread.get().createDate, 'dd-MM-yyy, HH:mm')}"></small>
+            </th>
+        </tr>
+        <tr >
+            <th  ></th>
+            <th  th:text="${findThread.get().description}" style="word-wrap: break-word; color: darkorange; border-collapse: collapse; border-bottom: 2px solid green"></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th style="background-color: indigo; height: 25px">
+                <a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()} or ${#authentication.getName().equals('Admin')}" th:href="@{${findThread.get().getId()} + '/delete'}"  >USUN</a>
+                <a th:if ="${#authentication.name} eq ${findThread.get().getUserThread().getUsername()}" th:href="@{${findThread.get().getId()} + '/editthread'}"  >EDYTUJ</a>
+            </th>
+        </tr>
+        <tr  th:each="post : ${allPosts}" >
+            <th >
+                <a th:text="${post.userPost.username}" th:href="@{'/user/' + ${post.userPost.username}}">dsa</a><p></p>
+                <small th:text="${#temporals.format(findThread.get().createDate, 'dd-MM-yyy, HH:mm')}"></small>
+            </th>
+            <th >
+                <p style="margin-top: 2%" th:text="${post.content}"></p>
+                <p style="background-color: indigo; height: 25px">
+                    <a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()} or ${#authentication.getName().equals('Admin')}" th:href="@{${findThread.get().getId()} + '/delete/' + ${post.getId()}}">USUN</a>
+                    <a th:if="${#authentication.name} eq ${post.getUserPost().getUsername()}" th:href="@{${findThread.get().getId()} + '/' + ${post.getId()} + '/editpost'}">EDYTUJ</a>
+                </p>
+            </th >
+        </tr>
+    </table>
+    <p></p>
+    <div sec:authorize="isAuthenticated()">
+    <form th:object="${post}" th:action="@{${findThread.get().getId()}}" method="post" >
+    <input type="hidden" th:field="*{id}"/>
+    <textarea class="form-control thread" type="text" rows="5" th:field="*{content}" />
+        <input class="btn btn-info thread" type="submit" name="action" value="Zapisz" />
+    </form></div>
+    <footer th:replace="site/footer :: footer"></footer>
+</div>
 
 
    <!--</div>-->
@@ -29,6 +73,6 @@
         <!--<button type="submit"></button>-->
     <!--</form>-->
 <!--</div>-->
-<footer th:replace="site/footer :: footer"></footer>
+
 </body>
 </html>
