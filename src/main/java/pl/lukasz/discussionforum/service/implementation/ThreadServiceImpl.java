@@ -90,5 +90,20 @@ public class ThreadServiceImpl implements ThreadService {
         }
         return newest;
     }
+
+    @Override
+    public List<Thread> findFiveNewestUserThreads(User user) {
+        List<Thread> List = threadRepository.findAllByOrderByCreateDateDesc();
+        List<Thread> newest = new ArrayList<>();
+        for(Thread thread: List) {
+            newest.add(thread);
+            if(newest.size() == 5)
+            {
+                break;
+            }
+        }
+        return newest;
+    }
+
 }
 

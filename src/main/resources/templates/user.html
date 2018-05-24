@@ -3,10 +3,63 @@
 <head th:replace="site/head :: head">
 </head>
 <body>
-
 <nav th:replace="site/navbar :: navbar"></nav>
-<h1 th:text="${user.getUsername()}"></h1>
+<div class="container-fluid">
+<table style="margin-left: 3%; margin-top: 1%">
+    <tr >
+        <th th:text="${user.getUsername()}" style="font-size: 40px">
+        </th>
+    <th style="padding-left: 30px" th:text="'ilość tematów: ' + ${user.getThread().size()}" >
+    </th>
+        <th style="padding-left: 30px">
+            <a th:if="${#authentication.getName()} eq ${user.getUsername()}" th:href="@{'/user/' + ${user.getId()} + '/edit'}"> <button th:text="'edytuj profil'" class="btn btn-info" style="width: 120px"></button></a>
+        </th>
+    </tr>
+    <tr >
+        <th th:text="${user.getEmail()}" style="font-size: 20px">
+        </th>
+        <th style="padding-left: 30px" th:text="'ilość postów: ' + ${user.getPost().size()}" >
+        </th>
+        <th style="padding-left: 30px">
+            <a th:if="${#authentication.getName()} eq ${user.getUsername()}" th:href="@{'users/delete/' + ${user.getId()}}" > <button th:text="'usuń konto'" class="btn btn-danger" style="width: 120px"></button></a>
+        </th>
+    </tr>
+    </table>
+    <hr style="border-width: 5px; background-color: darkorange"/>
 <!--<a th:if="${#authentication.getName()} eq ${user.getUsername()}" th:href="@{'/user/'+ ${user.getId()} + '/edit'}">Edytuj</a>-->
-<footer th:replace="site/footer :: footer"></footer>
+    <div class="row content">
+        <table class="table one" >
+            <thead class="thead-dark" >
+            <tr>
+                <th>Najnowsze tematy</th>
+            </tr>
+            </thead>
+            <tbody th:each="thread : ${user.getThread()}" class="bodythread">
+            <tr>
+                <td >
+                    <a th:href="@{'/threads/' + ${thread.id}}"><h6 th:text="${thread.threadName}" >"</h6> </a>
+                    <small style="float: right" th:text="${#temporals.format(thread.createDate, 'dd-MM-yyy, HH:mm')}"></small>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table two" >
+            <thead class="thead-dark">
+            <tr>
+                <th>Najnowsze posty</th>
+            </tr>
+            </thead>
+            <tbody th:each="post : ${user.getPost()}" class="bodythread">
+            <tr>
+                <td >
+                    <h6 th:text="${post.content}"></h6>
+                    <a th:href="@{'/threads/'+ ${post.threadPost.getId()}}" th:text="${post.threadPost.getThreadName()}"></a>
+                    <small style="float: right" th:text="${#temporals.format(post.createDate, 'dd-MM-yyy, HH:mm')}"></small>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<footer th:replace="site/footer :: footer"></footer></div>
 </body>
 </html>

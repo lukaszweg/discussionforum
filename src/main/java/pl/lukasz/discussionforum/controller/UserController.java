@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.lukasz.discussionforum.entity.Role;
 import pl.lukasz.discussionforum.entity.User;
 import pl.lukasz.discussionforum.service.RoleService;
+import pl.lukasz.discussionforum.service.ThreadService;
 import pl.lukasz.discussionforum.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +24,12 @@ public class UserController {
 
     private UserService userService;
     private RoleService roleService;
+    private ThreadService threadService;
 
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserService userService, RoleService roleService, ThreadService threadService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.threadService = threadService;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -84,6 +87,7 @@ public class UserController {
     @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
     public String findOneUserById(@PathVariable("username") String username, Model model) {
         model.addAttribute("user", userService.findByUsername(username));
+        model.addAttribute("threads", threadService.findAllAndOrderByCreationType());
         return "user";
     }
 

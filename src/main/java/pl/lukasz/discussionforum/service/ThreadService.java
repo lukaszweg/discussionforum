@@ -2,6 +2,7 @@ package pl.lukasz.discussionforum.service;
 
 import org.springframework.security.core.Authentication;
 import pl.lukasz.discussionforum.entity.Thread;
+import pl.lukasz.discussionforum.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,8 @@ public interface ThreadService {
     Thread findById(Long threadId);
 
     Thread presaveEdited(Thread thread, Long threadId, Authentication authentication);
+
+    List<Thread> findFiveNewestUserThreads(User user);
 
 
 //    Optional<Thread> update(Long threadId, Authentication authentication);
